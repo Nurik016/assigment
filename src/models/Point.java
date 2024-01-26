@@ -3,40 +3,25 @@ package models;
 public class Point {
     private double x;
     private double y;
+    private static int nextId = 1;
     private int id;
 
     public Point(double x, double y) {
-        setX(x);
-        setY(y);
-        setId();
+        this.x = x;
+        this.y = y;
+        this.id = nextId++;
     }
 
     public double getDistance(Point dest) {
-        double x2 = dest.getX();
-        double y2 = dest.getY();
-
-        double x1 = this.x;
-        double y1 = this.y;
-
-        double firstEq = x2 - x1;
-        double secondEq = y2 - y;
-
-        double distance = Math.sqrt(Math.pow(firstEq, 2) + Math.pow(secondEq, 2));
-
-        return distance;
+        return Math.hypot(dest.x - this.x, dest.y - this.y);
     }
 
     @Override
     public String toString() {
-        return "x value: " + this.x + "\n" + "y value: " + this.y + "\n" + "Point id: " + this.id + "\n";
+        return String.format("Point(ID: %d, X: %.2f, Y: %.2f)", id, x, y);
     }
 
-    // get and set
     public double getX() { return x; }
     public double getY() { return y; }
-    public void setX(double x) { this.x = x; }
-    public void setY(double y) { this.y = y; }
     public int getId() { return id; }
-    public void setId() { this.id = (int) System.currentTimeMillis(); }
-
 }
